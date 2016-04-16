@@ -1,4 +1,4 @@
-d3.csv("car.csv", function(error,data){
+d3.csv("https://s3.amazonaws.com/yubowenok/car.csv", function(error,data){
     dataViz(data);
     var headerNames = d3.keys(data[0]);
     var headerValue = d3.values(data[1]);
