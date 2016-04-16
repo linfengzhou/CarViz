@@ -1,0 +1,24 @@
+{
+  "name": "lab9_tz",
+  "homepage": "https://github.com/Tengf/BD_lab9",
+  "authors": [
+    "Tengf <tz869@nyu.edu>"
+  ],
+  "description": "homework of big data lab9",
+  "main": "index.html",
+  "keywords": [
+    "lab9"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jQuery": "^2.2.3",
+    "d3": "^3.5.16"
+  }
+}
