@@ -56,7 +56,7 @@ var yAxisGroup = scplot.append('g')
 var scc = scplot.append('g');
     
     
-d3.csv("car.csv", function(error, result) {
+d3.csv("https://s3.amazonaws.com/yubowenok/car.csv", function(error, result) {
     // define data
     data = result;
     var headerNames = d3.keys(data[0]);
