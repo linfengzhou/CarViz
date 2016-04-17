@@ -1,36 +1,3 @@
-<html>
-<head>
-    <!-- complete your HTML head here -->
-    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="stylesheet.css" />
-<!--    <script type="text/javascript" src="viz2.js"></script>-->
-</head>
-<body>
-    <h4 id="hovered">chevrolet chevelle malibu</h4>
-    <div class="plot">
-        <svg id="viz" width=600px height=400px></svg>
-    </div>
-    <div class="ui">
-        <div>
-            <label>X-Axis</label>
-            <select id="sel-x" onchange="optionCheck()">
-            </select>
-            <label>Y-Axis</label>
-            <select id="sel-y" onchange="optionCheck()">
-            </select>
-        </div>
-        <div>
-            <input id="mpg-min" type="text" value="0" size="10">
-            <input id="mpg-max" type="text" value="30" size="10">
-            <button id="update" onclick="setrange()">Query MPG</button>
-        </div> 
-    </div>
-</body>
-    
-    
-    
-<script>
 // define global variabbles
 var width = 600,
     height = 400,
@@ -55,16 +22,13 @@ var yAxisGroup = scplot.append('g')
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 var scc = scplot.append('g');
     
-    
 d3.csv("car.csv", function(error, result) {
     // define data
     data = result;
     var headerNames = d3.keys(data[0]);
     var headerValue = d3.values(data[1]);
     var xname = 'mpg';
-    var yname = 'displacement';
-    var minx = 0;
-    var maxx = 50;
+    var yname = 'mpg';
     var condition = headerValue.map(function(d) {
         return parseFloat(d).toString().length == d.length;
     });
@@ -75,35 +39,26 @@ d3.csv("car.csv", function(error, result) {
         }
     }
     optionviz(headerNum);
-    dataViz(data, xname, yname,minx,maxx);
+    dataViz(data, xname, yname);
 });
-    
-function dataViz(vdata, xname, yname,minx,maxx) {
-    
-    
-    var vdata1 = vdata.filter(function(d) {return d.mpg > minx});
-    var vdata2 = vdata1.filter(function(d) {return d.mpg < maxx});
-    // console.log(vdata2.map(function(d){return d.mpg}));
-    // vdata2 = vdata;
-    var max_displacement = d3.max(vdata2, function(d) {
+function dataViz(vdata, xname, yname) {
+    var max_displacement = d3.max(vdata, function(d) {
         return parseInt(d[xname]);
     });
-    var max_mpg = d3.max(vdata2, function(d) {
+    var max_mpg = d3.max(vdata, function(d) {
         return parseInt(d[yname]);
     });
-    var min_mpg = d3.min(vdata2, function(d) {
+    var min_mpg = d3.min(vdata, function(d) {
         return parseInt(d[yname]);
     })
-    var min_displacement = d3.min(vdata2, function(d) {
+    var min_displacement = d3.min(vdata, function(d) {
         return parseInt(d[xname]);
     });
     var mScale = d3.scale.linear().domain([min_mpg, max_mpg]).range([innerHeight, 0]);
-    var dScale = d3.scale.linear().domain([min_displacement, max_displacement]).range([0, innerWidth]);
-    
+    var dScale = d3.scale.linear().domain([0, max_displacement]).range([0, innerWidth]);
     var yAxis = d3.svg.axis().scale(mScale).orient('left');
     var xAxis = d3.svg.axis().scale(dScale).orient('bottom');
     var render_scc = scc.selectAll('circle').data(vdata);
-    
     render_scc.enter()
         .append('circle')
         .on("mouseenter", function(d) {
@@ -114,7 +69,6 @@ function dataViz(vdata, xname, yname,minx,maxx) {
                 opacity: 1
             }).text(d.name)
         });
-    
     render_scc.transition()
         .attr('cx', function(d) {
             return dScale(d[xname])
@@ -130,14 +84,10 @@ function dataViz(vdata, xname, yname,minx,maxx) {
 }
     
 function optionCheck() {
-    var minx = document.getElementById('mpg-min').value;
-    var maxx = document.getElementById('mpg-max').value;
     var optionX = document.getElementById("sel-x").value;
     var optionY = document.getElementById("sel-y").value;
-    
-    dataViz(data, optionX, optionY,minx,maxx);
+    dataViz(data, optionX, optionY);
 }
-    
 function optionviz(vdata) {
     var xoption = d3.select("select#sel-x")
         .selectAll("select#sel-x");
@@ -162,16 +112,3 @@ function optionviz(vdata) {
             return d;
         });
 }
-    
-function setrange(){
-    var optionX = document.getElementById("sel-x").value;
-    var optionY = document.getElementById("sel-y").value;
-    var minx = document.getElementById('mpg-min').value;
-    var maxx = document.getElementById('mpg-max').value;
-    dataViz(data, optionX, optionY,minx,maxx);
-  
-    
-}
-    
-</script>
-</html>
