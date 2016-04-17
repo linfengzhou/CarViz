@@ -112,7 +112,7 @@ function dataViz(vdata, xname, yname,minx,maxx) {
                 top: d3.event.clientY + 'px',
                 left: d3.event.clientX + 'px',
                 opacity: 1
-            }).text(d.name+', '+d.mpg)
+            }).text(d.name)
         });
     
     render_scc.transition()
@@ -124,8 +124,7 @@ function dataViz(vdata, xname, yname,minx,maxx) {
             return mScale(d[yname])
         })
         .attr('r', 2);
-    render_scc.exit()
-        .remove();
+    render_scc.exit().remove();
     xAxisGroup.call(xAxis);
     yAxisGroup.call(yAxis);
 }
