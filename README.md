@@ -1,5 +1,8 @@
 # CarViz
 
+Link to interactive map: http://linfengzhou.github.io/CarViz/
+
+
 Member:
 
 Linfeng Zhou: lz1335@nyu.edu
