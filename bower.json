@@ -1,8 +1,10 @@
 {
-  "name": "lab9_tz",
-  "homepage": "https://github.com/Tengf/BD_lab9",
+  "name": "lab9_CarViz",
+  "homepage": "https://github.com/linfengzhou/CarViz",
   "authors": [
     "Tengf <tz869@nyu.edu>"
+    "lingfengzhou <lz1335@nyu.edu>"
+    "seuen <sz1795@nyu.edu>"
   ],
   "description": "homework of big data lab9",
   "main": "index.html",
